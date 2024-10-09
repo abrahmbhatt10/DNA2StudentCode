@@ -18,6 +18,7 @@ public class DNA {
     public static int STRCount(String sequence, String STR) {
         int maxNumCount = 0;
         int currentLength;
+
         for(int i = 0; i < STR.length(); i++){
             if(STR.indexOf(sequence) == i){
 
