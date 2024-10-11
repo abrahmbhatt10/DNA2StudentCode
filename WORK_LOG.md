@@ -1,9 +1,13 @@
-Name: YOUR NAME HERE
+Name: Agastya Brahmbhatt
 
-| Date    |  Time  |                                     Update |
-|:--------|:------:|-------------------------------------------:|
-| April 5 | 9-10pm | I tried to write abstract, efficient code. |
-|         |        |                                            |
+| Date   |     Time     |                                                                                                                                                                                                                                                                    Update |
+|:-------|:------------:|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
+| Oct 9  | 12:35 - 1:05 |                                                                       I spent time brainstorming possible approaches. I spent some time looking at different string functions in java. I noticed that startsWith() would come in handy, potentially in some kind of loop. |
+| Oct 9  | 1:05 - 1:35  |                                                                                                                                   I started with a for loop. The for loop I realized wasn't working well with the rest of my code. I decided to use a while loop instead. |
+| Oct 9  | 1:35 - 2:05  |                                               I realized the for loop wasn't working because I didn't need to iterate through each character in sequence. I could use indexOf() to find the starting STR index. I used contains() to double check before using indexOf(). |
+| Oct 9  | 2:35 - 3:05  |                                                         I put breaks whenever the index was outside of the substring. I used multiple checks to find out whether or not the while loop was looping forever. Thus, I put additional checks to break out of the while loop. |
+| Oct 10 | 5:30 - 6:00  | I decided to use abstraction by creating multiple methods. These were getCountSTR and getIndexSTR. The first function returns the number of STR count at the start of the string. The latter function Returns starting index when the first instance of the STR is found. |
+| Oct 10 | 6:00 - 6:30  |                                                              I could get two tests passing. However, the others were looping forever. I tried debugging. The code seems to be working fine, but testChromosome() was too long to pass. It didn't time out for me, though. |
 
 
 To add a new row to the table, click into a cell and then hit shift-enter.
