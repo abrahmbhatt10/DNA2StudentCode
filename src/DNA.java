@@ -36,6 +36,9 @@ public class DNA {
             if((index + 1) < sequence.length()){
                 sequence = sequence.substring(index + 1);
             }
+            else{
+                break;
+            }
         }
         return maxNumCount;
     }
