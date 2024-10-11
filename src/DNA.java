@@ -1,3 +1,5 @@
+import javax.sound.midi.Sequence;
+
 /**
  * DNA
  * <p>
@@ -18,12 +20,42 @@ public class DNA {
     public static int STRCount(String sequence, String STR) {
         int maxNumCount = 0;
         int currentLength;
-
-        for(int i = 0; i < STR.length(); i++){
-            if(STR.indexOf(sequence) == i){
-
+        int index = 0;
+        int pCount = 0;
+        for(int i = 0; i < sequence.length(); i++){
+            index = getIndexSTR(sequence, STR);
+            if(index >= 0){
+                pCount = getCountSTR(sequence.substring(index), STR);
+                if(pCount > maxNumCount){
+                    maxNumCount = pCount;
+                }
             }
         }
-        return 0;
+        return maxNumCount;
+    }
+    /*
+        Returns starting index when the first instance of the STR is found.
+     */
+    public static int getIndexSTR(String sequence, String STR){
+       if(sequence.contains(STR)){
+           return sequence.indexOf(STR);
+       }
+       return -1;
+    }
+
+    /*
+        Returns the number of STR count at the start of the string
+     */
+    public static int getCountSTR(String sequence, String STR){
+        if(!sequence.startsWith(STR)){
+            return 0;
+        }
+        int count = 0;
+        String pSTR = sequence;
+        while(pSTR.startsWith(STR)){
+            count++;
+            pSTR = pSTR.substring(STR.length());
+        }
+        return count;
     }
 }
