@@ -22,13 +22,16 @@ public class DNA {
         int currentLength;
         int index = 0;
         int pCount = 0;
-        for(int i = 0; i < sequence.length(); i++){
+        while(sequence.length() > 0){
             index = getIndexSTR(sequence, STR);
             if(index >= 0){
                 pCount = getCountSTR(sequence.substring(index), STR);
                 if(pCount > maxNumCount){
                     maxNumCount = pCount;
                 }
+            }
+            if((index + 1) < sequence.length()){
+                sequence = sequence.substring(index + 1);
             }
         }
         return maxNumCount;
