@@ -22,9 +22,20 @@ public class DNA {
         int currentLength;
         int index = 0;
         int pCount = 0;
+        /*
+            The logic is similar to finding the max integer in an array.
+            The local variable pCount returns the count of sequences at a given index.
+            maxNumCount is the running max count of all the counts at different index locations.
+         */
         while(sequence.length() > 0){
+            /*
+                Find the starting STR location.
+             */
             index = getIndexSTR(sequence, STR);
             if(index >= 0){
+                /*
+                    Get the consecutive STR count.
+                 */
                 pCount = getCountSTR(sequence.substring(index), STR);
                 if(pCount > maxNumCount){
                     maxNumCount = pCount;
