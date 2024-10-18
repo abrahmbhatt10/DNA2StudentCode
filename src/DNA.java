@@ -19,8 +19,10 @@ public class DNA {
     /**
      * This function, STRCount(), returns the longest consecutive run of STR in sequence.
      */
-    public static int STRCount(String sequence, String STR) {
-        int maxNumCount = 0;
+    public static long STRCount(String sequence, String STR) {
+        /*
+    First Attempt:
+    int maxNumCount = 0;
         int currentLength;
         int index = 0;
         int pCount = 0;
@@ -28,16 +30,16 @@ public class DNA {
             The logic is similar to finding the max integer in an array.
             The local variable pCount returns the count of sequences at a given index.
             maxNumCount is the running max count of all the counts at different index locations.
-         */
+
         while(sequence.length() > 0){
             /*
                 Find the starting STR location.
-             */
+
             index = getIndexSTR(sequence, STR);
             if(index >= 0){
                 /*
                     Get the consecutive STR count.
-                 */
+
                 pCount = getCountSTR(sequence.substring(index), STR);
                 if(pCount > maxNumCount){
                     maxNumCount = pCount;
@@ -53,7 +55,8 @@ public class DNA {
                 break;
             }
         }
-        return maxNumCount;
+     */
+        return rabinKarp(sequence, STR);
     }
     /*
         Returns starting index when the first instance of the STR is found.
@@ -87,7 +90,7 @@ public class DNA {
     Horner's Method:
      */
 
-    public long hash(String t, int length){
+    public static long hash(String t, int length){
         long h = 0;
         int R = 256;
         long p = findPrime();
@@ -101,7 +104,7 @@ public class DNA {
     This code finds the largest prime number that is less than INTEGER_MAX. I got it from this site:
     https://stackoverflow.com/questions/14037688/find-the-highest-prime-number-in-a-given-range
      */
-    public long findPrime(){
+    public static long findPrime(){
         int flag=0;
         int b= Integer.MAX_VALUE;
         double sq = sqrt(b);
@@ -132,7 +135,7 @@ public class DNA {
     /*
         Rabin-Karp Algorithm from Mr. Blick's slides:
     */
-    public long rabinKarp(String sequence, String STR){
+    public static long rabinKarp(String sequence, String STR){
         long strHash = hash(STR, STR.length());
         int maxNumRepeats = 0;
         int numRepeats = 0;
