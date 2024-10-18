@@ -134,10 +134,11 @@ public class DNA {
     */
     public long rabinKarp(String sequence, String STR){
         long strHash = hash(STR, STR.length());
-        long seqHash = hash(sequence.substring(0, STR.length()), STR.length());
         int maxNumRepeats = 0;
         int numRepeats = 0;
-        for (int i = STR.length(); i < sequence.length(); i++){
+        long seqHash;
+        for (int i = 0; i < sequence.length(); i++){
+            seqHash = hash(sequence.substring(i, STR.length()), STR.length());
             if (strHash == seqHash) {
                 numRepeats++;
                 // begin checking for consecutive appearances
