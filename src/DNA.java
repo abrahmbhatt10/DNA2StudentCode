@@ -1,5 +1,7 @@
 import javax.sound.midi.Sequence;
 
+import static java.lang.Math.sqrt;
+
 /**
  * DNA
  * <p>
@@ -77,5 +79,78 @@ public class DNA {
             pSTR = pSTR.substring(STR.length());
         }
         return count;
+    }
+
+    /*
+    Pseudocode from Mr. Blick's slides:
+
+    Horner's Method:
+     */
+
+    public long hash(String t, int length){
+        long h = 0;
+        int R = 256;
+        long p = findPrime();
+        for(int i = 0; i < length; i++){
+            h = (h * R + t.charAt(i)) % p;
+        }
+        return h;
+    }
+
+    /*
+    This code finds the largest prime number that is less than INTEGER_MAX. I got it from this site:
+    https://stackoverflow.com/questions/14037688/find-the-highest-prime-number-in-a-given-range
+     */
+    public long findPrime(){
+        int flag=0;
+        int b= Integer.MAX_VALUE;
+        double sq = sqrt(b);
+        long i;
+        for(i = b; i>=0; i--)
+        {
+            if(i%2!=0)
+            {
+                for(b=3;b<=sq;b++)
+                {
+                    if(i%b!=0)
+                    {
+                        flag=1;
+                    }
+                    else if(i%b==0)
+                    {
+                        flag=0;
+                        break;
+                    }
+                }
+                if(flag==1){
+                    return i;
+                }
+            }
+        }
+        return i;
+    }
+    /*
+        Rabin-Karp Algorithm from Mr. Blick's slides:
+    */
+    public long rabinKarp(String sequence, String STR){
+        long strHash = hash(STR, STR.length());
+        long seqHash = hash(sequence.substring(0, STR.length()), STR.length());
+        int maxNumRepeats = 0;
+        int numRepeats = 0;
+        for (int i = STR.length(); i < sequence.length(); i++){
+            if (strHash == seqHash) {
+                numRepeats++;
+                // begin checking for consecutive appearances
+                while((strHash == seqHash) && (i < sequence.length())){
+                    seqHash = hash(sequence.substring(1 + (i - STR.length()), i), i);
+                    numRepeats++;
+                    i++;
+                }
+                if(numRepeats > maxNumRepeats){
+                    maxNumRepeats = numRepeats;
+                }
+            }
+        }
+        return maxNumRepeats;
     }
 }
