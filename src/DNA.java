@@ -141,10 +141,7 @@ public class DNA {
         long numRepeats = 0;
         long seqHash;
         for (int i = 0; i < (sequence.length() - STR.length()); i++){
-            if((sequence.length() - i) < STR.length()){
-                break;
-            }
-            seqHash = hash(sequence.substring(i, STR.length()));
+            seqHash = hash(sequence.substring(i, i + STR.length()));
             if (strHash == seqHash) {
                 // begin checking for consecutive appearances
                 numRepeats = countMatch(strHash, seqHash, sequence.substring(i), STR);
@@ -160,10 +157,7 @@ public class DNA {
         int numRepeats = 0;
         int i = 0;
         while((strHash == seqHash) && (i < (sequence.length() - STR.length()))){
-            if((sequence.length() - i) < STR.length()){
-                break;
-            }
-            seqHash = hash(sequence.substring(i, STR.length()));
+            seqHash = hash(sequence.substring(i, i + STR.length()));
             numRepeats++;
             i = i + STR.length();
         }
