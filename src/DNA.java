@@ -137,24 +137,30 @@ public class DNA {
     */
     public static long rabinKarp(String sequence, String STR){
         long strHash = hash(STR, STR.length());
-        int maxNumRepeats = 0;
-        int numRepeats = 0;
+        long maxNumRepeats = 0;
+        long numRepeats = 0;
         long seqHash;
         for (int i = 0; i < sequence.length(); i++){
             seqHash = hash(sequence.substring(i, STR.length()), STR.length());
             if (strHash == seqHash) {
-                numRepeats++;
                 // begin checking for consecutive appearances
-                while((strHash == seqHash) && (i < sequence.length())){
-                    seqHash = hash(sequence.substring(1 + (i - STR.length()), i), i);
-                    numRepeats++;
-                    i++;
-                }
+                numRepeats = countMatch(strHash, seqHash, sequence.substring(i), STR);
                 if(numRepeats > maxNumRepeats){
                     maxNumRepeats = numRepeats;
                 }
             }
         }
         return maxNumRepeats;
+    }
+
+    public static long countMatch(long strHash, long seqHash, String sequence, String STR){
+        int numRepeats = 0;
+        int i = 0;
+        while((strHash == seqHash) && i < sequence.length()){
+            seqHash = hash(sequence.substring(i, STR.length()), STR.length());
+            numRepeats++;
+            i = i + STR.length();
+        }
+        return numRepeats;
     }
 }
