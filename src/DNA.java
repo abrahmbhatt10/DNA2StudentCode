@@ -93,7 +93,7 @@ public class DNA {
     public static long hash(String t, int length){
         long h = 0;
         int R = 256;
-        long p = findPrime();
+        long p = 54321102419L;
         for(int i = 0; i < length; i++){
             h = (h * R + t.charAt(i)) % p;
         }
