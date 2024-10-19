@@ -15,7 +15,9 @@ import static java.lang.Math.sqrt;
  */
 
 public class DNA {
-
+    private static long p = 54321102419L;
+    private static int R = 256;
+    private static long RM = 1;
     /**
      * This function, STRCount(), returns the longest consecutive run of STR in sequence.
      */
@@ -90,11 +92,9 @@ public class DNA {
     Horner's Method:
      */
 
-    public static long hash(String t){
+    public static long hash(String t, int length){
         long h = 0;
-        int R = 256;
-        long p = 54321102419L;
-        for(int i = 0; i < t.length(); i++){
+        for(int i = 0; (i < t.length()) && (i < length); i++){
             h = (h * R + t.charAt(i)) % p;
         }
         return h;
@@ -136,23 +136,28 @@ public class DNA {
         Rabin-Karp Algorithm from Mr. Blick's slides:
     */
     public static long rabinKarp(String sequence, String STR){
-        long strHash = hash(STR);
+        long strHash = hash(STR, STR.length());
         long maxNumRepeats = 0;
         long numRepeats = 0;
-        long seqHash;
-        for (int i = 0; i < (sequence.length() - STR.length()); i++){
-            seqHash = hash(sequence.substring(i, i + STR.length()));
+        long seqHash = 0;
+        for(int i = 1; i <= STR.length() - 1; i++){
+            RM = (R * RM) % p;
+        }
+        seqHash = hash(sequence.substring(0, STR.length()), STR.length());
+        for (int i = STR.length(); i < (sequence.length() - STR.length()); i++){
             if (strHash == seqHash) {
                 // begin checking for consecutive appearances
-                numRepeats = countMatch(strHash, seqHash, sequence.substring(i), STR);
+                numRepeats = getCountSTR(sequence.substring(i), STR);
                 if(numRepeats > maxNumRepeats){
                     maxNumRepeats = numRepeats;
                 }
             }
+            seqHash = (seqHash + p - (RM * sequence.charAt(i - STR.length()) % p)) % p;
+            seqHash = (seqHash * R + sequence.charAt(i)) % p;
         }
         return maxNumRepeats;
     }
-
+    /*
     public static long countMatch(long strHash, long seqHash, String sequence, String STR){
         int numRepeats = 0;
         int i = 0;
@@ -163,4 +168,6 @@ public class DNA {
         }
         return numRepeats;
     }
+     */
+
 }
