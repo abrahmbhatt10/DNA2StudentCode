@@ -90,11 +90,11 @@ public class DNA {
     Horner's Method:
      */
 
-    public static long hash(String t, int length){
+    public static long hash(String t){
         long h = 0;
         int R = 256;
         long p = 54321102419L;
-        for(int i = 0; i < length; i++){
+        for(int i = 0; i < t.length(); i++){
             h = (h * R + t.charAt(i)) % p;
         }
         return h;
@@ -136,7 +136,7 @@ public class DNA {
         Rabin-Karp Algorithm from Mr. Blick's slides:
     */
     public static long rabinKarp(String sequence, String STR){
-        long strHash = hash(STR, STR.length());
+        long strHash = hash(STR);
         long maxNumRepeats = 0;
         long numRepeats = 0;
         long seqHash;
@@ -144,7 +144,7 @@ public class DNA {
             if((sequence.length() - i) < STR.length()){
                 break;
             }
-            seqHash = hash(sequence.substring(i, STR.length()), STR.length());
+            seqHash = hash(sequence.substring(i, STR.length()));
             if (strHash == seqHash) {
                 // begin checking for consecutive appearances
                 numRepeats = countMatch(strHash, seqHash, sequence.substring(i), STR);
@@ -163,7 +163,7 @@ public class DNA {
             if((sequence.length() - i) < STR.length()){
                 break;
             }
-            seqHash = hash(sequence.substring(i, STR.length()), STR.length());
+            seqHash = hash(sequence.substring(i, STR.length()));
             numRepeats++;
             i = i + STR.length();
         }
