@@ -157,8 +157,10 @@ public class DNA {
         int numRepeats = 0;
         int i = 0;
         while((strHash == seqHash) && (i < (sequence.length() - STR.length()))){
+            if(strHash == seqHash){
+                numRepeats++;
+            }
             seqHash = hash(sequence.substring(i, i + STR.length()));
-            numRepeats++;
             i = i + STR.length();
         }
         return numRepeats;
