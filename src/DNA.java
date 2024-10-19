@@ -137,6 +137,18 @@ public class DNA {
     */
     public static long rabinKarp(String sequence, String STR){
         long strHash = hash(STR, STR.length());
+
+        String STR2 = STR+STR;
+        long strHash1 = hash(STR2, STR2.length());
+
+        String STR3 = STR+STR+STR;
+        long strHash2 = hash(STR3, STR3.length());
+
+        System.out.println(STR +" HASH 1 "+ strHash);
+        System.out.println(STR2 + " HASH 2 "+ strHash);
+        System.out.println(STR3+ "HASH 3 "+ strHash);
+
+
         long maxNumRepeats = 0;
         long numRepeats = 0;
         long seqHash = 0;
@@ -156,25 +168,35 @@ public class DNA {
             }
             if (strHash == seqHash) {
                 // begin checking for consecutive appearances
-                numRepeats = getCountSTR(sequence.substring(i), STR);
-                if(numRepeats > maxNumRepeats){
-                    maxNumRepeats = numRepeats;
+                numRepeats = 1;
+                if (i + STR.length() <= sequence.length()) {
+                    numRepeats += countMatch(sequence.substring(i + STR.length()), STR);
+                }
+                if (numRepeats > maxNumRepeats) {
+                        maxNumRepeats = numRepeats;
                 }
             }
         }
         return maxNumRepeats;
     }
-    /*
-    public static long countMatch(long strHash, long seqHash, String sequence, String STR){
+
+
+    public static long countMatch(String sequence, String STR){
         int numRepeats = 0;
         int i = 0;
-        while((strHash == seqHash) && (i < (sequence.length() - STR.length()))){
+        while(sequence.startsWith(STR) && i <= sequence.length() - STR.length())
+        {
+            numRepeats++;
+            sequence = sequence.substring(i+STR.length());
+        }
+
+
+        /*while (strHash == seqHash) && (i <= (sequence.length() - STR.length()))){
             numRepeats++;
             i = i + STR.length();
-            seqHash = hash(sequence.substring(i, i + STR.length()));
-        }
-        return numRepeats;
+            seqHash = hash(sequence.substring(i, i + STR.length()),STR.length());
+        }*/
+         return numRepeats;
     }
-     */
 
 }
