@@ -140,11 +140,20 @@ public class DNA {
         long maxNumRepeats = 0;
         long numRepeats = 0;
         long seqHash = 0;
+        RM=1;
         for(int i = 1; i <= STR.length() - 1; i++){
             RM = (R * RM) % p;
         }
-        seqHash = hash(sequence.substring(0, STR.length()), STR.length());
-        for (int i = STR.length(); i < (sequence.length() - STR.length()); i++){
+        for (int i = 0; i < (sequence.length() - STR.length()); i++){
+            if(i == 0)
+            {
+                seqHash = hash(sequence.substring(0, STR.length()), STR.length());
+            }
+            else
+            {
+                seqHash = (seqHash + p - RM * sequence.charAt(i - 1) % p) % p;
+                seqHash = (seqHash * R + sequence.charAt(i+STR.length()-1)) % p;
+            }
             if (strHash == seqHash) {
                 // begin checking for consecutive appearances
                 numRepeats = getCountSTR(sequence.substring(i), STR);
@@ -152,8 +161,6 @@ public class DNA {
                     maxNumRepeats = numRepeats;
                 }
             }
-            seqHash = (seqHash + p - (RM * sequence.charAt(i - STR.length())) % p) % p;
-            seqHash = (seqHash * R + sequence.charAt(i)) % p;
         }
         return maxNumRepeats;
     }
