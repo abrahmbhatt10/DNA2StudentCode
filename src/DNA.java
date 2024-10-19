@@ -152,7 +152,7 @@ public class DNA {
                     maxNumRepeats = numRepeats;
                 }
             }
-            seqHash = (seqHash + p - (RM * sequence.charAt(i - STR.length()) % p)) % p;
+            seqHash = (seqHash + p - (RM * sequence.charAt(i - STR.length())) % p) % p;
             seqHash = (seqHash * R + sequence.charAt(i)) % p;
         }
         return maxNumRepeats;
