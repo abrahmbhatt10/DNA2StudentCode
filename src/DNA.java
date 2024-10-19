@@ -145,8 +145,8 @@ public class DNA {
         long strHash2 = hash(STR3, STR3.length());
 
         System.out.println(STR +" HASH 1 "+ strHash);
-        System.out.println(STR2 + " HASH 2 "+ strHash);
-        System.out.println(STR3+ "HASH 3 "+ strHash);
+        System.out.println(STR2 + " HASH 2 "+ strHash1);
+        System.out.println(STR3+ "HASH 3 "+ strHash2);
 
 
         long maxNumRepeats = 0;
