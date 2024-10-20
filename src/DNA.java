@@ -18,6 +18,7 @@ public class DNA {
     private static long p = 54321102419L;
     private static int R = 256;
     private static long RM = 1;
+    private static long strHash = 0;
     /**
      * This function, STRCount(), returns the longest consecutive run of STR in sequence.
      */
@@ -100,6 +101,22 @@ public class DNA {
         return h;
     }
 
+     /*
+    Pseudocode from Mr. Blick's slides:
+
+    Horner's Method:
+     */
+
+    public static boolean hashCompare(String t, int length){
+        long h = 0;
+        for(int i = 0; (i < t.length()) && (i < length); i++){
+            h = (h * R + t.charAt(i)) % p;
+        }
+        if(h == strHash)
+           return true;
+        return false;
+    }
+
     /*
     This code finds the largest prime number that is less than INTEGER_MAX. I got it from this site:
     https://stackoverflow.com/questions/14037688/find-the-highest-prime-number-in-a-given-range
@@ -136,19 +153,7 @@ public class DNA {
         Rabin-Karp Algorithm from Mr. Blick's slides:
     */
     public static long rabinKarp(String sequence, String STR){
-        long strHash = hash(STR, STR.length());
-
-        String STR2 = STR+STR;
-        long strHash1 = hash(STR2, STR2.length());
-
-        String STR3 = STR+STR+STR;
-        long strHash2 = hash(STR3, STR3.length());
-
-        System.out.println(STR +" HASH 1 "+ strHash);
-        System.out.println(STR2 + " HASH 2 "+ strHash1);
-        System.out.println(STR3+ "HASH 3 "+ strHash2);
-
-
+        strHash = hash(STR, STR.length());
         long maxNumRepeats = 0;
         long numRepeats = 0;
         long seqHash = 0;
@@ -184,10 +189,12 @@ public class DNA {
     public static long countMatch(String sequence, String STR){
         int numRepeats = 0;
         int i = 0;
-        while(sequence.startsWith(STR) && i <= sequence.length() - STR.length())
+        while(hashCompare(sequence.substring(i, i+STR.length()), STR.length()))
         {
             numRepeats++;
-            sequence = sequence.substring(i+STR.length());
+            i = i+ STR.length();
+            if(i > sequence.length())
+                break;
         }
 
 
