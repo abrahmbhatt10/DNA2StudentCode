@@ -153,17 +153,30 @@ public class DNA {
         Rabin-Karp Algorithm from Mr. Blick's slides:
     */
     public static long rabinKarp(String sequence, String STR){
+        // Calculate hash for pattern we are searching for
         strHash = hash(STR, STR.length());
+        // Stores the max value of consecutive repeated patterns
+        // I use similar logic like finding the max integer in an array.
         long maxNumRepeats = 0;
+        // Gives the current consecutive patterns and stores to maxNumRepeats if greater.
         long numRepeats = 0;
+        // Initialized to first hash of STR length, and then shifted one character at a time
+        // Rabin Karp hash calculation is efficient with one character shifting -> O(1)n.
         long seqHash = 0;
+        // RM is used to remove the leading character before the hash value for the new character can be added.
+        // Code taken from the textbook algorithms 4th edition Sedgewick & Wayne.
         RM=1;
         for(int i = 1; i <= STR.length() - 1; i++){
             RM = (R * RM) % p;
         }
+        // Loop through one character at a time through the sequence to find the first match.
+        // After the first match, call the function getCountSTR() to get the subsequent matches through simple String
+        // compare.
+
         for (int i = 0; i < (sequence.length() - STR.length()); i++){
             if(i == 0)
             {
+                // Calculating sequence hash for the first time
                 seqHash = hash(sequence.substring(0, STR.length()), STR.length());
             }
             else
@@ -175,7 +188,7 @@ public class DNA {
                 // begin checking for consecutive appearances
                 numRepeats = 1;
                 if (i + STR.length() <= sequence.length()) {
-                    numRepeats += countMatch(sequence.substring(i + STR.length()), STR);
+                    numRepeats += getCountSTR(sequence.substring(i + STR.length()), STR);
                 }
                 if (numRepeats > maxNumRepeats) {
                         maxNumRepeats = numRepeats;
