@@ -181,24 +181,34 @@ public class DNA {
             }
             else
             {
+                // Calculate the hash value to remove the first character
                 seqHash = (seqHash + p - RM * sequence.charAt(i - 1) % p) % p;
+                // Calculate the hash value to add the new character
                 seqHash = (seqHash * R + sequence.charAt(i+STR.length()-1)) % p;
             }
             if (strHash == seqHash) {
-                // begin checking for consecutive appearances
+                // There is a match
+                // Begins checking for consecutive appearances
                 numRepeats = 1;
                 if (i + STR.length() <= sequence.length()) {
                     numRepeats += getCountSTR(sequence.substring(i + STR.length()), STR);
                 }
+                // Store the max value in maxNumRepeats
                 if (numRepeats > maxNumRepeats) {
                         maxNumRepeats = numRepeats;
+                }
+                // if not enough characters left, break.
+                if(i + STR.length() > sequence.length()){
+                    break;
                 }
             }
         }
         return maxNumRepeats;
     }
 
-
+    /*
+        Finds consecutive pattern hash using the hash method.
+     */
     public static long countMatch(String sequence, String STR){
         int numRepeats = 0;
         int i = 0;
