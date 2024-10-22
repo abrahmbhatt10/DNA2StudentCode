@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6d822f69-9e3c-4e2b-8ee1-11779bb646bd" name="Changes" comment="code">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="6d822f69-9e3c-4e2b-8ee1-11779bb646bd" name="Changes" comment="code" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -56,7 +54,7 @@
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;
   }
 }</component>
-  <component name="RunManager" selected="JUnit.DNATest.testChromosome22">
+  <component name="RunManager" selected="JUnit.DNATest.testBasic">
     <configuration name="DNATest.testBasic" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="DNA 2.0 Student Code" />
       <option name="PACKAGE_NAME" value="" />
@@ -109,11 +107,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.DNATest.testBasic" />
         <item itemvalue="JUnit.DNATest.testChromosome22" />
         <item itemvalue="JUnit.DNATest.testLargest" />
         <item itemvalue="JUnit.DNATest.testEvenMore" />
         <item itemvalue="JUnit.DNATest.testMore" />
-        <item itemvalue="JUnit.DNATest.testBasic" />
       </list>
     </recent_temporary>
   </component>
@@ -398,7 +396,15 @@
       <option name="project" value="LOCAL" />
       <updated>1729472753578</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="code">
+      <option name="closed" value="true" />
+      <created>1729560165981</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1729560165981</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
