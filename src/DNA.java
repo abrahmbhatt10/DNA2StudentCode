@@ -94,7 +94,7 @@ public class DNA {
             if (strHash == seqHash) {
                 // There is a match
                 // Begins checking for consecutive appearances
-                if((prevMatchIndex + m) == i){
+                if((prevMatchIndex + m) == (i-m+1)){
                     // This is a consecutive match
                     numRepeats++;
                 }
@@ -107,7 +107,7 @@ public class DNA {
                 /*
                     We store the match index in prevMatchIndex before looping again.
                  */
-                prevMatchIndex = i;
+                prevMatchIndex = (i - m+1);
                 /*
                     If current numRepeats is larger than the max so far, then
                     save that value in maxNumRepeats.
