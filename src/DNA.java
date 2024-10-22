@@ -55,8 +55,9 @@ public class DNA {
         // Rabin Karp hash calculation is efficient with one character shifting -> O(1)n.
         long seqHash = 0;
 
-        int prevMatchIndex = -1;
         int m = STR.length();
+        //using a negative value as initial value to not match falsely to an index
+        int prevMatchIndex = ((-1)*m)-1;
         // Calculate hash for pattern we are searching for
         strHash = hash(STR, 0, m - 1);
         // RM is used to remove the leading character before the hash value for the new character can be added.
