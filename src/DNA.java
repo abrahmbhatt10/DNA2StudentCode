@@ -69,8 +69,17 @@ public class DNA {
         // Calculating sequence hash for the first time
         seqHash = hash(sequence, 0, m - 1);
         if(seqHash == strHash){
+            // There is a match at index 0.
+            // Previous match index stores the last match index value.
+            // Previous match index helps track consecutive matches.
             prevMatchIndex = 0;
+            /*
+                This tracks the current consecutive matches.
+             */
             numRepeats = 1;
+            /*
+                This tracks the max consecutive matches found so far.
+             */
             maxNumRepeats = 1;
         }
 
@@ -90,9 +99,19 @@ public class DNA {
                     numRepeats++;
                 }
                 else{
+                    /*
+                        This is a non-consecutive match. We need to reset the numRepeats count.
+                     */
                     numRepeats = 1;
                 }
+                /*
+                    We store the match index in prevMatchIndex before looping again.
+                 */
                 prevMatchIndex = i;
+                /*
+                    If current numRepeats is larger than the max so far, then
+                    save that value in maxNumRepeats.
+                 */
                 if(numRepeats > maxNumRepeats){
                     maxNumRepeats = numRepeats;
                 }
